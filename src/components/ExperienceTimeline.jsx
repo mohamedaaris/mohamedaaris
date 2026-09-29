@@ -27,11 +27,11 @@ const experiences = [
     color: '#4d7cff',
   },
   {
-    date: '2025',
-    title: 'ADMA-ICDM conference',
-    org: 'ADMA Association',
-    description: 'I presented my research paper entitled “Transmission in Cyclic Bipartite Graphs”, which investigates fundamental aspects of graph theory and their applications in the analysis of graph structures. The work presented in this paper has been submitted to the Ain Shams Engineering Journal, a highly reputed Q1 journal from Elsevier with an impact factor of 5.9, and the first revision has been successfully completed.',
-    icon: '🧱',
+    date: '2025 — 2026',
+    title: 'Published Research Paper',
+    org: 'Ain Shams Engineering Journal (Elsevier)',
+    description: 'Published research paper entitled "Average distance in cyclic bipartite graphs" in the Ain Shams Engineering Journal (Elsevier). Science Citation Indexed (SCI) • Q1 Journal • Impact Factor 6.2. Co-authored by Dr. S. Savari Prabhu, Ms. M. Anitha, P. Mohamed Aaris, and Ms. M. Arulperumjothi.',
+    icon: '🔬',
     color: '#00ff88',
   },
   {

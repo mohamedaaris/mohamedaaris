@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import CoreIdentity from './components/CoreIdentity'
 import SkillMatrix from './components/SkillMatrix'
 import ProjectHub from './components/ProjectHub'
+import Publications from './components/Publications'
 import Certificates from './components/Certificates'
 import ExperienceTimeline from './components/ExperienceTimeline'
 import ContactPortal from './components/ContactPortal'
@@ -369,6 +370,7 @@ function App() {
             <CoreIdentity />
             <SkillMatrix />
             <ProjectHub />
+            <Publications />
             <Certificates />
             <ExperienceTimeline />
             <ContactPortal />
