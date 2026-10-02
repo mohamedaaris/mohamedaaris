@@ -1,294 +1,140 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from './Navbar'
 
-// ═══════════════════════════════════════════════════════════════
-// HOW TO SET UP REAL EMAIL DELIVERY:
-// 1. Go to https://web3forms.com/
-// 2. Enter YOUR email address (mohamedaaris019@gmail.com)
-// 3. You'll receive an Access Key via email
-// 4. Replace the placeholder below with your real key
-// ═══════════════════════════════════════════════════════════════
-const WEB3FORMS_KEY = 'ae1493e1-92ed-4079-9832-12e41c47791a'  // ← PASTE YOUR KEY HERE
+const WEB3FORMS_KEY = 'ae1493e1-92ed-4079-9832-12e41c47791a'
+const EMAIL = 'mohamedaaris019@gmail.com'
 
 export default function ContactPortal() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [isTransmitting, setIsTransmitting] = useState(false)
-  const [status, setStatus] = useState(null) // 'success' | 'error' | null
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [form, setForm] = useState({ name: '', email: '', reason: 'Just saying hi', message: '' })
+  const [sending, setSending] = useState(false)
+  const [status, setStatus] = useState(null)
+  const [li, setLi] = useState(8) // K (last letter)
+  const [paused, setPaused] = useState(false)
+  const [dims, setDims] = useState({ w: 63, h: 74 })
 
-  const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  const LINE = "LET'S TALK"
+  const LETTERS = LINE.split('').map((ch, i) => ({ ch, i })).filter(o => o.ch !== ' ')
+
+  // Auto-run the selector across every letter; hold it while hovering one
+  useEffect(() => {
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const t = setInterval(() => setLi(v => (v + 1) % LETTERS.length), 1100)
+    return () => clearInterval(t)
+  }, [paused, LETTERS.length])
+
+  const sel = LETTERS[li].i
+  const hoverLetter = (pos) => (e) => {
+    setPaused(true)
+    setLi(pos)
+    const r = e.currentTarget.getBoundingClientRect()
+    setDims({ w: Math.round(r.width), h: Math.round(r.height) })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsTransmitting(true)
-    setStatus(null)
+  const set = (k) => (e) => setForm(prev => ({ ...prev, [k]: e.target.value }))
 
+  const submit = async (e) => {
+    e.preventDefault()
+    setSending(true)
+    setStatus(null)
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          subject: `🧠 Neural Transmission from ${formData.name}`,
-          from_name: 'Portfolio Neural Link',
+          name: form.name, email: form.email, message: `[${form.reason}] ${form.message}`,
+          subject: `Portfolio inquiry from ${form.name}`,
+          from_name: 'Portfolio contact form',
         }),
       })
-
-      const result = await response.json()
-
-      if (result.success) {
-        setStatus('success')
-        setFormData({ name: '', email: '', message: '' })
-      } else {
-        setStatus('error')
-      }
-    } catch (err) {
-      console.error('Transmission failed:', err)
-      setStatus('error')
+      const out = await res.json()
+      if (out.success) {
+        setStatus('ok')
+        setForm({ name: '', email: '', reason: 'Just saying hi', message: '' })
+      } else setStatus('err')
+    } catch {
+      setStatus('err')
     } finally {
-      setIsTransmitting(false)
-      // Auto-clear status after 5 seconds
-      setTimeout(() => setStatus(null), 5000)
+      setSending(false)
+      setTimeout(() => setStatus(null), 6000)
     }
   }
 
   return (
     <section className="section" id="contact" ref={ref}>
-      <motion.div
-        className="section-header"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-      >
-        🧾 CONTACT PORTAL
-      </motion.div>
-
-      <motion.h2
-        className="section-title"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        Transmit Message
-      </motion.h2>
-
-      <motion.div
-        className="contact-portal"
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
-        <div className="terminal-window">
-          <div className="terminal-header">
-            <span className="terminal-dot red" />
-            <span className="terminal-dot yellow" />
-            <span className="terminal-dot green" />
-            <span className="terminal-title">transmission_portal.sh — neural_link</span>
-          </div>
-
-          <div className="terminal-body">
-            {/* Terminal Prompt */}
-            <motion.div
-              style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                color: '#4a5568',
-                fontSize: '0.75rem',
-                marginBottom: '1.5rem',
-                letterSpacing: '1px',
-              }}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.5 }}
-            >
-              <span style={{ color: '#00ff88' }}>aaris@neural</span>
-              <span style={{ color: '#8892b0' }}>:</span>
-              <span style={{ color: '#4d7cff' }}>~/contact</span>
-              <span style={{ color: '#8892b0' }}>$ </span>
-              <span style={{ color: '#00f5ff' }}>init transmission --secure</span>
-            </motion.div>
-
-            <form onSubmit={handleSubmit}>
-              <motion.div
-                className="terminal-input-group"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.6, duration: 0.4 }}
-              >
-                <label className="terminal-label" htmlFor="contact-name">
-                  Sender Identification
-                </label>
-                <input
-                  className="terminal-input"
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name..."
-                  required
-                />
-              </motion.div>
-
-              <motion.div
-                className="terminal-input-group"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.7, duration: 0.4 }}
-              >
-                <label className="terminal-label" htmlFor="contact-email">
-                  Communication Channel
-                </label>
-                <input
-                  className="terminal-input"
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email..."
-                  required
-                />
-              </motion.div>
-
-              <motion.div
-                className="terminal-input-group"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.8, duration: 0.4 }}
-              >
-                <label className="terminal-label" htmlFor="contact-message">
-                  Transmission Data
-                </label>
-                <textarea
-                  className="terminal-textarea"
-                  id="contact-message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Enter your message..."
-                  required
-                />
-              </motion.div>
-
-              <motion.button
-                className="transmit-btn"
-                type="submit"
-                disabled={isTransmitting}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.9, duration: 0.4 }}
-                whileHover={!isTransmitting ? { scale: 1.02 } : {}}
-                whileTap={!isTransmitting ? { scale: 0.98 } : {}}
-              >
-                {isTransmitting ? (
-                  <motion.span
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  >
-                    ◈ TRANSMITTING...
-                  </motion.span>
-                ) : status === 'success' ? (
-                  '✓ TRANSMISSION COMPLETE'
-                ) : status === 'error' ? (
-                  '✕ TRANSMISSION FAILED — RETRY'
-                ) : (
-                  '◈ TRANSMIT MESSAGE'
-                )}
-              </motion.button>
-            </form>
-
-            {/* Transmission Status */}
-            {status === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                style={{
-                  marginTop: '1rem',
-                  fontFamily: "'Share Tech Mono', monospace",
-                  fontSize: '0.75rem',
-                  color: '#00ff88',
-                  textAlign: 'center',
-                  letterSpacing: '1px',
-                }}
-              >
-                {'>'} MESSAGE DELIVERED TO NEURAL LINK. RESPONSE INCOMING.
-              </motion.div>
-            )}
-
-            {status === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                style={{
-                  marginTop: '1rem',
-                  fontFamily: "'Share Tech Mono', monospace",
-                  fontSize: '0.75rem',
-                  color: '#ff5f56',
-                  textAlign: 'center',
-                  letterSpacing: '1px',
-                }}
-              >
-                {'>'} TRANSMISSION ERROR. CHECK CONNECTION AND RETRY.
-              </motion.div>
-            )}
-          </div>
-        </div>
-
-        {/* Social Links */}
+      <p className="kicker">Stay in touch</p>
+      <div className="contact-grid">
         <motion.div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '1.5rem',
-            marginTop: '2rem',
-            flexWrap: 'wrap',
-          }}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1.1 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.75 }}
         >
-          {[
-            { label: 'GitHub', icon: '⟨⟩', url: 'https://github.com/mohamedaaris' },
-            { label: 'LinkedIn', icon: '◉', url: 'https://www.linkedin.com/in/mohamedaaris/' },
-            { label: 'Email', icon: '✉', url: 'mailto:mohamedaaris019@gmail.com' },
-          ].map((social) => (
-            <motion.a
-              key={social.label}
-              href={social.url}
-              target={social.url.startsWith('mailto') ? undefined : '_blank'}
-              rel="noopener noreferrer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: '0.8rem',
-                color: '#8892b0',
-                textDecoration: 'none',
-                letterSpacing: '1px',
-                padding: '0.5rem 1rem',
-                border: '1px solid rgba(0, 245, 255, 0.1)',
-                borderRadius: '4px',
-                transition: 'all 0.3s ease',
-              }}
-              whileHover={{
-                color: '#00f5ff',
-                borderColor: 'rgba(0, 245, 255, 0.4)',
-                boxShadow: '0 0 15px rgba(0, 245, 255, 0.15)',
-              }}
-            >
-              <span>{social.icon}</span>
-              {social.label}
-            </motion.a>
-          ))}
+          <h2 className="contact-big" onMouseLeave={() => setPaused(false)}>
+            {LINE.split('').map((ch, i) =>
+              ch === ' '
+                ? <span key={i} className="talk-space"> </span>
+                : (
+                  <span
+                    key={i}
+                    className={`talk-ch ${i === sel ? 'on' : ''}`}
+                    onMouseEnter={hoverLetter(LETTERS.findIndex(o => o.i === i))}
+                  >
+                    {ch}
+                    {i === sel && (
+                      <span className="talk-box" aria-hidden>
+                        <i className="th tl" /><i className="th tr" /><i className="th bl" /><i className="th br" />
+                        <em>{ch}&nbsp;&nbsp;{dims.w} × {dims.h}</em>
+                      </span>
+                    )}
+                  </span>
+                )
+            )}
+          </h2>
+          <p className="contact-mail">
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </p>
+          <div className="contact-btns">
+            <a className="btn btn-solid" href={`mailto:${EMAIL}`}>Email me</a>
+            <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a className="btn btn-ghost" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a className="btn btn-ghost" href={RESUME_URL} target="_blank" rel="noopener noreferrer">Résumé</a>
+          </div>
+          <p className="section-desc" style={{ marginTop: '1.6rem' }}>
+            Open to internships, collaborations and interesting technical conversations.
+            I usually reply within 24–48 hours.
+          </p>
         </motion.div>
-      </motion.div>
+
+        <motion.form
+          className="form-card"
+          onSubmit={submit}
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.15, duration: 0.75 }}
+        >
+          <label htmlFor="c-name">Name</label>
+          <input id="c-name" value={form.name} onChange={set('name')} placeholder="Your name" required />
+          <label htmlFor="c-email">Email</label>
+          <input id="c-email" type="email" value={form.email} onChange={set('email')} placeholder="you@company.com" required />
+          <label htmlFor="c-reason">I'm here for</label>
+          <select id="c-reason" value={form.reason} onChange={set('reason')}>
+            <option>Just saying hi</option>
+            <option>Internship opportunity</option>
+            <option>Project collaboration</option>
+            <option>Interview / screening</option>
+          </select>
+          <label htmlFor="c-msg">Message</label>
+          <textarea id="c-msg" value={form.message} onChange={set('message')} placeholder="Tell me about the role or idea…" required />
+          <button className="btn btn-solid" type="submit" disabled={sending} style={{ marginTop: '1.2rem', width: '100%', justifyContent: 'center' }}>
+            {sending ? 'Sending…' : status === 'ok' ? '✓ Sent' : 'Send'}
+          </button>
+          {status === 'ok' && <p className="form-status ok">Thanks — your message is on its way.</p>}
+          {status === 'err' && <p className="form-status err">Could not send. Please email me directly.</p>}
+        </motion.form>
+      </div>
     </section>
   )
 }

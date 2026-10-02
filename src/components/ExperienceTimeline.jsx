@@ -1,136 +1,133 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 
-const experiences = [
-  {
-    date: '2026 — PRESENT',
-    title: 'B.Tech CSE',
-    org: 'Rajalakshmi Engineering College',
-    description: 'Pursuing Computer Science with focus on software engineering, data structures, algorithms, and modern web technologies. Graduating 2028.',
-    icon: '🎓',
-    color: '#b946ff',
-  },
-  {
-    date: '2026',
-    title: 'ERPNext Internship',
-    org: 'Tekbee Technologies',
-    description: 'Worked on Customer relationship management(CRM) module. Created a lead tracker in ERPNext which makes the work easier for the companies by just drag and dropping you can convert a lead to opportunity, Customer and also direct mail features. Developed an AI chatbot in ERPNext that performs ERP tasks using prompt-based commands.',
-    icon: '⚡',
-    color: '#00f5ff',
-  },
-  {
-    date: '2025 — 2026',
-    title: 'SIH participation',
-    org: 'Smart India Hackathon',
-    description: 'Participated in Smart India Hackathon 2025. Even though we got only till the internal hackathon round, it was a great learning experience. Where we learned how to work in a team and how to build a project from scratch.',
-    icon: '📜',
-    color: '#4d7cff',
-  },
-  {
-    date: '2025 — 2026',
-    title: 'Published Research Paper',
-    org: 'Ain Shams Engineering Journal (Elsevier)',
-    description: 'Published research paper entitled "Average distance in cyclic bipartite graphs" in the Ain Shams Engineering Journal (Elsevier). Science Citation Indexed (SCI) • Q1 Journal • Impact Factor 6.2. Co-authored by Dr. S. Savari Prabhu, Ms. M. Anitha, P. Mohamed Aaris, and Ms. M. Arulperumjothi.',
-    icon: '🔬',
-    color: '#00ff88',
-  },
-  {
-    date: '2025',
-    title: 'ICGTA conference',
-    org: 'Amrita Vishwa Vidyapeetham',
-    description: 'I have participated in the International Conference on Graph Theory and Its Applications (ICGTA-2025). The sessions and discussions gave me useful insights and expanded my understanding of current research trends and open questions in the field.',
-    icon: '🧱',
-    color: '#00ff88',
-  },
-  {
-    date: '2026',
-    title: 'Visit to ISRO - Indian Space Research Organization',
-    org: 'ISRO',
-    description: 'I learned about maintenance and operational protocols of the automatic fuel filling station at launch pads and also learned about the critical launch preparation equipment, propellant handling systems, safety mechanisms, and the functions of launch pads, umbilical towers, and the zeroth room during pre-launch and launch operations. A highlight was the meeting with Mr. Vijayakumar, Scientist E and Deputy Manager, SDSC SHAR who shared practical insights on engineering challenges, system reliability, and the precision required in space missions. We have also discussed ISRO Open Projects with the Technical Team, gaining valuable perspectives on current research and innovation.',
-    icon: '🚀',
-    color: '#00ff88',
-  }
+const miles = [
+  { n: '01', cat: 'HTML · CSS', flap: 'FIRST', title: 'First websites', body: 'Static pages and CSS experiments — where the obsession with layout started.', img: '/assets/miraisync1.jpg' },
+  { n: '02', cat: 'Python · DSA', flap: 'LEARN', title: 'Python and problem solving', body: 'Scripting, automation and daily DSA practice that still pays off in every build.', img: '/assets/python.jpg' },
+  { n: '03', cat: 'SIH 2025', flap: 'TEAM', title: 'Hackathon round', body: 'Smart India Hackathon internal round. Learned scoping, teamwork and demo-driven shipping.', img: '/assets/sih%201.jpg' },
+  { n: '04', cat: 'ERPNext · Frappe', flap: 'WORK', title: 'Internship at Tekbee', body: 'CRM lead tracker plus a prompt-based AI chatbot performing real ERP tasks.', img: '/assets/tekbee.png' },
+  { n: '05', cat: 'Graph Theory', flap: 'MEET', title: 'ICGTA conference', body: 'International Conference on Graph Theory and Its Applications (ICGTA-2025) at Amrita — current trends and open questions in the field.', img: '/assets/ICGTA%20conference%20cochin.jpeg' },
+  { n: '06', cat: 'Elsevier · Q1', flap: 'PROOF', title: 'Published researcher', body: 'Average distance in cyclic bipartite graphs — Ain Shams Engineering Journal, IF 6.2.', img: '/assets/research.png' },
+  { n: '07', cat: 'ISRO · SHAR', flap: 'SPACE', title: 'ISRO educational visit', body: 'Launch-pad fuel systems, propellant handling and safety protocols at SDSC SHAR with Scientist E Mr. Vijayakumar.', img: '/assets/ISRO.jpeg' },
+  { n: '08', cat: 'ServiceNow', flap: 'ADMIN', title: 'ServiceNow virtual internship', body: 'SmartBridge × ServiceNow University × AICTE program — fundamentals, Agentic AI, Administration, Flows, ATF, Reports and CSA prep.', img: '/assets/servicenow.jpg' },
+  { n: '09', cat: 'IBM SkillsBuild', flap: 'GENAI', title: 'IBM SkillsBuild internship', body: 'Edunet Foundation program — watsonx AI Studio, Orchestrate, Granite models and BOB. Built SmartDesk AI, a natural-language desktop assistant.', img: '/assets/ibm.png' },
+  { n: '10', cat: 'React · AI', flap: 'SHIP', title: 'Realtime and AI products', body: 'ResuMatch AI, FlowLink, research agents — live, demoable, used.', img: '/assets/resumatch1.jpeg' },
+  { n: '11', cat: 'ICODMATH 2026', flap: 'STAGE', title: 'Two papers on stage', body: 'Presented “Number of 3-step Pairs in Fractal Cubic Network” and “Average Distance in {3,5}-Regular Cyclic Bipartite Graphs” at ICODMATH2026, REC.', img: '/assets/ICODMATH.jpg' },
 ]
+
+function SplitFlap({ text }) {
+  return (
+    <span className="splitflap" aria-hidden>
+      {text.split('').map((c, i) => (
+        <AnimatePresence mode="wait" key={i}>
+          <motion.span
+            key={c + text}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.18, delay: i * 0.03 }}
+          >
+            {c}
+          </motion.span>
+        </AnimatePresence>
+      ))}
+    </span>
+  )
+}
 
 export default function ExperienceTimeline() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const [hoveredIdx, setHoveredIdx] = useState(-1)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [idx, setIdx] = useState(0)
+  const [dir, setDir] = useState(1)
+  const n = miles.length
+
+  const go = (d) => {
+    setDir(d)
+    setIdx(i => (i + d + n) % n)
+  }
+
+  const m = miles[idx]
 
   return (
-    <section className="section" id="experience" ref={ref}>
-      <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}>
-        📡 DATA STREAM
-      </motion.div>
-      <motion.h2 className="section-title" initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }} animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ delay: 0.2, duration: 0.6 }}>
-        Experience Timeline
-      </motion.h2>
-
-      <div className="timeline-stream">
-        <motion.div className="timeline-line" initial={{ scaleY: 0, transformOrigin: 'top' }} animate={isInView ? { scaleY: 1 } : {}} transition={{ duration: 2, ease: 'easeOut' }} />
-
-        {/* Flowing data particles */}
-        {isInView && [0, 1, 2].map(i => (
-          <motion.div key={i}
-            style={{
-              position: 'absolute', left: 17 + i * 2, width: 6 - i * 1.5, height: 6 - i * 1.5,
-              borderRadius: '50%', background: i === 0 ? '#00f5ff' : i === 1 ? '#b946ff' : '#4d7cff',
-              boxShadow: `0 0 ${10 - i * 2}px ${i === 0 ? '#00f5ff' : i === 1 ? '#b946ff' : '#4d7cff'}`, zIndex: 3,
-            }}
-            animate={{ top: ['0%', '100%'], opacity: [0, 0.9, 0.9, 0] }}
-            transition={{ duration: 4 + i * 2, repeat: Infinity, ease: 'linear', delay: i * 1.5 }}
-          />
-        ))}
-
-        {experiences.map((exp, i) => (
-          <motion.div key={i} className="timeline-node"
-            initial={{ opacity: 0, x: -60 }} animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.4 + i * 0.25, duration: 0.7, type: 'spring', stiffness: 80 }}
-            onMouseEnter={() => setHoveredIdx(i)} onMouseLeave={() => setHoveredIdx(-1)}
+    <section className="section" id="journey" ref={ref}>
+      <div className="flip-grid">
+        <div>
+          <p className="kicker">Journey</p>
+          <motion.h2
+            className="h-giant"
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.75 }}
           >
-            {/* Circular icon node */}
-            <motion.div
-              style={{
-                position: 'absolute', left: 5, top: 10, width: 32, height: 32, borderRadius: '50%',
-                border: `2px solid ${exp.color}`, background: `radial-gradient(circle, ${exp.color}20, rgba(10,10,26,0.95) 70%)`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', zIndex: 2,
-                boxShadow: hoveredIdx === i ? `0 0 20px ${exp.color}60, 0 0 40px ${exp.color}25` : `0 0 8px ${exp.color}20`,
-                transition: 'box-shadow 0.3s',
-              }}
-              initial={{ scale: 0 }} animate={isInView ? { scale: 1 } : {}}
-              transition={{ delay: 0.6 + i * 0.25, type: 'spring' }}
-              whileHover={{ scale: 1.3 }}
-            >
-              {exp.icon}
-              {hoveredIdx === i && (
-                <motion.div
-                  animate={{ scale: [1, 2], opacity: [0.5, 0] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  style={{ position: 'absolute', inset: -4, borderRadius: '50%', border: `1px solid ${exp.color}` }}
-                />
-              )}
-            </motion.div>
+            How I got<br /><span className="it">here</span>
+          </motion.h2>
+          <p className="section-desc">From static pages to realtime platforms.</p>
+          <div style={{ marginTop: '1.8rem' }}>
+            <SplitFlap text={m.flap} />
+          </div>
+          <p className="flip-count">{String(idx + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</p>
+        </div>
 
-            {/* Content Card */}
-            <motion.div
-              style={{
-                marginLeft: 20, padding: '1.5rem',
-                background: hoveredIdx === i ? `linear-gradient(135deg, rgba(10,10,26,0.8), ${exp.color}08)` : 'linear-gradient(135deg, rgba(10,10,26,0.6), rgba(15,15,46,0.2))',
-                border: `1px solid ${hoveredIdx === i ? exp.color + '40' : 'rgba(0,245,255,0.06)'}`,
-                borderRadius: '12px', position: 'relative', overflow: 'hidden', transition: 'all 0.4s ease',
-              }}
-              whileHover={{ x: 8, scale: 1.02 }} transition={{ duration: 0.3 }}
-            >
-              <div style={{ position: 'absolute', left: 0, top: '10%', bottom: '10%', width: 2, background: `linear-gradient(180deg, transparent, ${exp.color}, transparent)`, opacity: hoveredIdx === i ? 0.8 : 0.3, transition: 'opacity 0.3s' }} />
-              {hoveredIdx === i && (
-                <motion.div initial={{ width: 0 }} animate={{ width: '100%' }} style={{ position: 'absolute', top: 0, left: 0, height: 1, background: `linear-gradient(90deg, transparent, ${exp.color}, transparent)` }} />
-              )}
-              <span className="timeline-date" style={{ color: exp.color }}>{exp.date}</span>
-              <h3 className="timeline-title">{exp.title}</h3>
-              <span className="timeline-org" style={{ color: exp.color }}>{exp.org}</span>
-              <p className="timeline-desc">{exp.description}</p>
-            </motion.div>
-          </motion.div>
+        <div className="flip-stage">
+          {miles.map((t, i) => {
+            const rel = (i - idx + n) % n
+            if (rel > 4) return null
+            return (
+              <motion.div
+                key={t.n}
+                className="flip-card"
+                onClick={() => go(1)}
+                animate={{
+                  x: rel * 26,
+                  rotate: rel * 6,
+                  scale: 1 - rel * 0.045,
+                  opacity: 1 - rel * 0.22,
+                  zIndex: 60 - rel,
+                }}
+                transition={{ type: 'spring', stiffness: 200, damping: 24 }}
+                drag={rel === 0 ? 'x' : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.4}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -70) go(1)
+                  else if (info.offset.x > 70) go(-1)
+                }}
+                whileHover={rel === 0 ? { scale: 1.015 } : {}}
+                style={{ cursor: 'pointer' }}
+              >
+                <span className="flip-num">{t.n}</span>
+                <div className="flip-img">
+                  <img src={t.img} alt="" loading="lazy" />
+                </div>
+                <div className="flip-text">
+                  <p className="flip-cat">{t.cat}</p>
+                  <h4>{t.title}</h4>
+                  <p className="flip-body">{t.body}</p>
+                </div>
+              </motion.div>
+            )
+          })}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={idx}
+              className="flip-ghost"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+          </AnimatePresence>
+        </div>
+      </div>
+      <p className="flip-hint">Drag or click the card to flip through {n} milestones</p>
+      <div className="flip-dots">
+        {miles.map((t, i) => (
+          <button
+            key={t.n}
+            aria-label={`Go to milestone ${i + 1}`}
+            className={`flip-dot ${i === idx ? 'on' : ''}`}
+            onClick={() => { setDir(i > idx ? 1 : -1); setIdx(i) }}
+          />
         ))}
       </div>
     </section>

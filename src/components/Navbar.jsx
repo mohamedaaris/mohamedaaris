@@ -1,152 +1,93 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+
+// Résumé hosted on Google Drive
+export const RESUME_URL = 'https://drive.google.com/file/d/1Cpm3t17IROh065koZku0HHdnCyZEJo5K/view?usp=sharing'
+export const GITHUB_URL = 'https://github.com/mohamedaaris'
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/mohamedaaris/'
 
 const navItems = [
-  { id: 'identity', label: 'Core' },
+  { id: 'home', label: 'Home' },
+  { id: 'work', label: 'Work' },
+  { id: 'about', label: 'About' },
+  { id: 'journey', label: 'Journey' },
   { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'publications', label: 'Research' },
-  { id: 'certificates', label: 'Certs' },
-  { id: 'experience', label: 'Timeline' },
+  { id: 'research', label: 'Research' },
+  { id: 'credentials', label: 'Certificates' },
+  { id: 'moments', label: 'Moments' },
   { id: 'contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('identity')
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [active, setActive] = useState('home')
+  const [open, setOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28 })
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-
-      // Detect active section
-      const sections = navItems.map(item => ({
-        id: item.id,
-        el: document.getElementById(item.id),
-      }))
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = sections[i].el
-        if (el) {
-          const rect = el.getBoundingClientRect()
-          if (rect.top <= window.innerHeight / 3) {
-            setActiveSection(sections[i].id)
-            break
-          }
-        }
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      // ids in page order — last one above the line wins
+      const ids = navItems.map(n => n.id)
+      let current = 'home'
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.35) current = id
       }
+      setActive(current)
     }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-      setMobileOpen(false)
-    }
+  const go = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setOpen(false)
   }
 
   return (
     <>
       <motion.nav
-        className="nav-bar"
-        initial={{ y: -80, opacity: 0 }}
+        className={`nav ${scrolled ? 'scrolled' : ''}`}
+        initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        style={{
-          borderBottom: scrolled ? '1px solid rgba(0, 245, 255, 0.1)' : '1px solid transparent',
-        }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <motion.div
-          className="nav-logo"
-          whileHover={{ scale: 1.05 }}
-          style={{ cursor: 'pointer' }}
-          onClick={() => scrollTo('identity')}
-        >
-          {'<AARIS/>'}
-        </motion.div>
+        <span className="nav-logo" onClick={() => go('home')}>PA<em>.</em></span>
 
         <ul className="nav-links">
-          {navItems.map((item, i) => (
-            <motion.li
-              key={item.id}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 + i * 0.1 }}
-            >
-              <span
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-                onClick={() => scrollTo(item.id)}
-              >
-                {item.label}
+          {navItems.map(n => (
+            <li key={n.id}>
+              <span className={`nav-link ${active === n.id ? 'active' : ''}`} onClick={() => go(n.id)}>
+                {n.label}
               </span>
-            </motion.li>
+            </li>
           ))}
         </ul>
 
-        <motion.div
-          className="nav-status"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          <span className="status-dot" />
-          SYSTEM ONLINE
-        </motion.div>
+        <div className="nav-cta">
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a className="resume-pill" href={RESUME_URL} target="_blank" rel="noopener noreferrer">Résumé</a>
+        </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="mobile-menu-btn"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          id="mobile-menu-toggle"
-        >
-          <motion.span
-            animate={{
-              rotate: mobileOpen ? 45 : 0,
-              y: mobileOpen ? 6 : 0,
-            }}
-          />
-          <motion.span
-            animate={{
-              opacity: mobileOpen ? 0 : 1,
-            }}
-          />
-          <motion.span
-            animate={{
-              rotate: mobileOpen ? -45 : 0,
-              y: mobileOpen ? -6 : 0,
-            }}
-          />
+        <button className="mobile-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+          <span /><span /><span />
         </button>
+
+        <motion.div className="nav-progress" style={{ scaleX: progress }} />
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {mobileOpen && (
+        {open && (
           <motion.div
-            className="mobile-menu open"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="mobile-menu"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           >
-            {navItems.map((item, i) => (
-              <motion.button
-                key={item.id}
-                className="mobile-nav-link"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: i * 0.05 }}
-                onClick={() => scrollTo(item.id)}
-              >
-                {item.label}
-              </motion.button>
+            {navItems.map(n => (
+              <button key={n.id} onClick={() => go(n.id)}>{n.label}</button>
             ))}
           </motion.div>
         )}

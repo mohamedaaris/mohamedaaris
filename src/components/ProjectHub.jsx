@@ -4,542 +4,280 @@ import { createPortal } from 'react-dom'
 
 const projects = [
   {
-    id: 'PRJ-001',
     title: 'MiraiSync',
-    description: 'MiraiSync is a collaborative streaming platform that allows multiple users to watch videos simultaneously from different locations. The platform synchronizes video playback in real-time, ensuring everyone enjoys the same content without delays. It features a responsive chat system, user-friendly room creation, and supports a wide range of video sources.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Flask', 'Socket.IO', 'Websocket'],
-    status: 'LIVE',
+    tagline: 'Realtime collaborative watch-party platform',
+    description: 'Synchronized video playback across locations with realtime chat via WebSockets, room creation and multi-source support with latency handling.',
+    stack: ['JavaScript', 'Flask', 'Socket.IO'],
+    cat: 'Full Stack',
+    status: 'Live',
     url: 'https://miraisync.app/',
-    accent: '#00f5ff',
-    media: [{ type: 'image', src: '/assets/miraisync1.jpg ', caption: 'Chatbot' }, { type: 'image', src: '/assets/miraisync2.jpg', caption: 'Chatbot' }, { type: 'image', src: '/assets/miraisync3.jpg', caption: 'Chatbot' }, { type: 'image', src: '/assets/miraisync4.jpg', caption: 'Chatbot' }, { type: 'image', src: '/assets/miraisync5.jpg', caption: 'Chatbot' }]
+    shot: '/assets/miraisync2.jpg',
+    glow: 'rgba(200,255,46,0.16)',
+    media: [
+      { src: '/assets/miraisync1.jpg', caption: 'Watch room' },
+      { src: '/assets/miraisync2.jpg', caption: 'Synchronized playback' },
+      { src: '/assets/miraisync3.jpg', caption: 'Live chat' },
+      { src: '/assets/miraisync4.jpg', caption: 'Room management' },
+      { src: '/assets/miraisync5.jpg', caption: 'Mobile view' },
+    ],
   },
   {
-    id: 'PRJ-002',
     title: 'ResuMatch AI',
-    description: 'ResuMatch AI streamlines the entire process - from resume parsing to job applications - while providing an AI assistant to guide students through their career journey with personalized recommendations and automated communication.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Flask', 'SBERT', 'TF-IDF', 'GNN model', 'NLP', 'tesseract'],
-    status: 'DEPLOYED',
+    tagline: 'AI resume parsing & job matching assistant',
+    description: 'Resume parsing, skill extraction and job matching with SBERT / TF-IDF, plus an AI assistant for recommendations and application drafts.',
+    stack: ['Python', 'Flask', 'SBERT'],
+    cat: 'AI',
+    status: 'Live',
     url: 'https://aarisx0-resumatch.hf.space/',
-    accent: '#b946ff',
-    media: [{ type: 'image', src: '/assets/resumatch1.jpeg', caption: 'Resumatch' }, { type: 'image', src: '/assets/resumatch2.jpeg', caption: 'Resumatch' }, { type: 'image', src: '/assets/resumatch3.jpeg', caption: 'Resumatch' }, { type: 'image', src: '/assets/resumatch4.jpeg', caption: 'Resumatch' }, { type: 'image', src: '/assets/resumatch5.jpeg', caption: 'Resumatch' }],
+    shot: '/assets/resumatch1.jpeg',
+    glow: 'rgba(150,140,255,0.16)',
+    media: [
+      { src: '/assets/resumatch1.jpeg', caption: 'Dashboard' },
+      { src: '/assets/resumatch2.jpeg', caption: 'Resume analysis' },
+      { src: '/assets/resumatch3.jpeg', caption: 'Job matches' },
+      { src: '/assets/resumatch4.jpeg', caption: 'AI assistant' },
+      { src: '/assets/resumatch5.jpeg', caption: 'Application flow' },
+    ],
   },
   {
-    id: 'PRJ-003',
-    title: 'AgentX - AI Agent Platform',
-    description: 'An advanced AI web interface that combines a chat-first design with reasoning, automation, and tool integration. Create, manage, and deploy AI agents through natural conversation with Llama 3.2 3B. Built with Flask, featuring a modern dark/light theme interface, real-time chat, and modular agent tools system.',
-    tech: ['flask', 'python', 'javascript', 'css', 'html', 'tesseract', 'llama 3.2 3B', 'NLP'],
-    status: 'LIVE',
-    accent: '#4d7cff',
-    media: [{ type: 'image', src: '/assets/chatbot1.jpeg', caption: 'Chatbot' }, { type: 'image', src: '/assets/chatbot2.jpeg', caption: 'Chatbot' }, { type: 'image', src: '/assets/chatbot3.jpeg', caption: 'Chatbot' }, { type: 'image', src: '/assets/chatbot4.jpeg', caption: 'Chatbot' }, { type: 'image', src: '/assets/chatbot5.jpeg', caption: 'Chatbot' }],
-  },
-  {
-    id: 'PRJ-004',
-    title: 'Flowlink- seamless connection platform',
-    description: 'FlowLink is a cross-platform continuity system built with React, Kotlin, Node.js, WebSocket, and WebRTC that enables seamless content sharing across Android and web devices. It features intelligent file handling with temporary cache on mobile (no storage bloat), smart URL deep-linking to native apps, automatic session discovery with instant notifications, and drag-and-drop transfers for files, text, and URLs.',
-    tech: ['react', 'kotlin', 'node.js', 'websocket', 'webrtc'],
-    status: 'DEPLOYED',
+    title: 'FlowLink',
+    tagline: 'Seamless Android ↔ web continuity & sharing',
+    description: 'Cross-platform sharing (React, Kotlin, Node.js, WebSocket, WebRTC) with session discovery, deep-linking and drag-and-drop transfers.',
+    stack: ['React', 'Kotlin', 'WebRTC'],
+    cat: 'Client',
+    status: 'Live',
     url: 'https://flowlink-1sta.onrender.com/',
-    accent: '#00ff88',
-    media: [{ type: 'image', src: '/assets/flowlink1.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink2.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink3.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink4.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink5.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink6.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink7.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink8.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink9.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink10.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink11.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink12.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink13.png', caption: 'Flowlink' }, { type: 'image', src: '/assets/flowlink14.png', caption: 'Flowlink' }]
+    shot: '/assets/flowlink1.png',
+    glow: 'rgba(110,200,255,0.16)',
+    media: [
+      { src: '/assets/flowlink1.png', caption: 'Overview' },
+      { src: '/assets/flowlink2.png', caption: 'Pairing' },
+      { src: '/assets/flowlink3.png', caption: 'File transfer' },
+      { src: '/assets/flowlink4.png', caption: 'Text & URL share' },
+      { src: '/assets/flowlink5.png', caption: 'Session view' },
+      { src: '/assets/flowlink6.png', caption: 'Mobile app' },
+      { src: '/assets/flowlink7.png', caption: 'Device linking' },
+      { src: '/assets/flowlink8.png', caption: 'Transfer queue' },
+      { src: '/assets/flowlink9.png', caption: 'Notifications' },
+      { src: '/assets/flowlink10.png', caption: 'History' },
+      { src: '/assets/flowlink11.png', caption: 'Settings' },
+      { src: '/assets/flowlink12.png', caption: 'Deep linking' },
+      { src: '/assets/flowlink13.png', caption: 'Drag & drop' },
+      { src: '/assets/flowlink14.png', caption: 'Cross-device sync' },
+    ],
   },
   {
-    id: 'PRJ-005',
-    title: 'Autonomous Research Agent System',
-    description: 'A multi-agent research system that autonomously searches and collects the research papers for the topic we give and builds the reference block. It also validates the reference we give whether it is right or wrong and corrects all the typo or mistakes like author/journal name automatically and then gives the correct reference block.',
-    tech: ['javascript', 'API', 'CSS', 'HTML', 'python', 'flask'],
-    status: 'LIVE',
+    title: 'Research Agent',
+    tagline: 'Multi-agent literature search & citation fixer',
+    description: 'Searches papers for a topic, builds a reference list, and validates / corrects citations automatically.',
+    stack: ['Python', 'Flask', 'REST APIs'],
+    cat: 'AI',
+    status: 'Live',
     url: 'https://research-pnaa.onrender.com/',
-    accent: '#ff2d7c',
-    media: [{ type: 'image', src: '/assets/research1.png', caption: 'Research' }, { type: 'image', src: '/assets/research2.png', caption: 'Research' }, { type: 'image', src: '/assets/research3.png', caption: 'Research' }, { type: 'image', src: '/assets/research4.png', caption: 'Research' }, { type: 'image', src: '/assets/research5.png', caption: 'Research' }, { type: 'image', src: '/assets/research6.png', caption: 'Research' }, { type: 'image', src: '/assets/research7.png', caption: 'Research' }],
+    shot: '/assets/research1.png',
+    glow: 'rgba(255,158,44,0.14)',
+    media: [
+      { src: '/assets/research1.png', caption: 'Home' },
+      { src: '/assets/research2.png', caption: 'Search' },
+      { src: '/assets/research3.png', caption: 'Results' },
+      { src: '/assets/research4.png', caption: 'References' },
+      { src: '/assets/research5.png', caption: 'Validation' },
+      { src: '/assets/research6.png', caption: 'Corrections' },
+      { src: '/assets/research7.png', caption: 'Export' },
+    ],
   },
   {
-    id: 'PRJ-006',
-    title: 'E-commerce Website',
-    description: 'I designed an e-commerce website for online shopping. The website allows users to browse and purchase products online. The website features a responsive design, a user-friendly interface, and a secure payment gateway. The website is designed to deliver a seamless shopping experience for users.',
-    tech: ['Next.js', 'Node.js', 'MySQL', 'JWT'],
-    status: 'DEPLOYED',
+    title: 'AgentX',
+    tagline: 'Chat-first interface to build AI agents',
+    description: 'Chat, reasoning and tool use in one interface. Create and deploy agents through conversation (Llama 3.2 3B) with a modular tools system.',
+    stack: ['Python', 'Llama 3.2', 'Flask'],
+    cat: 'AI',
+    status: 'In development',
+    url: null,
+    shot: '/assets/chatbot1.jpeg',
+    glow: 'rgba(255,110,120,0.14)',
+    note: 'In development — code on request.',
+    media: [
+      { src: '/assets/chatbot1.jpeg', caption: 'Chat interface' },
+      { src: '/assets/chatbot2.jpeg', caption: 'Agent builder' },
+      { src: '/assets/chatbot3.jpeg', caption: 'Tool integrations' },
+      { src: '/assets/chatbot4.jpeg', caption: 'Reasoning view' },
+      { src: '/assets/chatbot5.jpeg', caption: 'Settings' },
+    ],
+  },
+  {
+    title: 'E-commerce Store',
+    tagline: 'Full-stack online shopping experience',
+    description: 'Product browsing, cart, JWT auth and checkout. Next.js + Node.js + MySQL end to end.',
+    stack: ['Next.js', 'Node.js', 'MySQL'],
+    cat: 'Web',
+    status: 'Live',
     url: 'https://ecommerce-gngm.vercel.app/',
-    accent: '#ed8b00',
-    media: [{ type: 'image', src: '/assets/ecommerce.jpg', caption: 'ecommerce' }],
+    shot: '/assets/ecommerce.jpg',
+    glow: 'rgba(120,255,200,0.13)',
+    media: [{ src: '/assets/ecommerce.jpg', caption: 'Homepage' }],
   },
 ]
 
-const statusColors = { LIVE: '#00ff88', DEPLOYED: '#00f5ff', BETA: '#ffbd2e' }
+/* ── Case-study modal ── */
+function Modal({ project, onClose }) {
+  const [i, setI] = useState(0)
+  const media = project.media || []
+  const item = media.length ? media[i % media.length] : null
 
-/* ── Connection lines between nodes ── */
-function NodeConnections({ positions, activeIdx }) {
-  const connections = [
-    [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0],
-    [0, 3], [1, 4], [2, 5],
-  ]
-  return (
-    <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }}>
-      <defs>
-        <filter id="line-glow">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-      {connections.map(([a, b], i) => {
-        if (!positions[a] || !positions[b]) return null
-        const isActive = activeIdx === a || activeIdx === b
-        return (
-          <g key={i}>
-            <line x1={positions[a].x} y1={positions[a].y} x2={positions[b].x} y2={positions[b].y}
-              stroke="#00f5ff" strokeWidth={isActive ? 1.5 : 0.5} strokeOpacity={isActive ? 0.5 : 0.08}
-              filter={isActive ? 'url(#line-glow)' : undefined} style={{ transition: 'all 0.4s ease' }}
-            />
-            {isActive && (
-              <circle r="2.5" fill="#00f5ff" opacity="0.9" filter="url(#line-glow)">
-                <animateMotion dur="1.5s" repeatCount="indefinite" path={`M${positions[a].x},${positions[a].y} L${positions[b].x},${positions[b].y}`} />
-              </circle>
-            )}
-          </g>
-        )
-      })}
-    </svg>
-  )
-}
-
-/* ── Single Project Node (circular) ── */
-function ProjectNode({ project, index, isInView, pos, hovered, onHover, onLeave, onClick }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ delay: 0.2 + index * 0.1, type: 'spring', stiffness: 140, damping: 14 }}
-      onMouseEnter={onHover} onMouseLeave={onLeave} onClick={onClick}
-      style={{ position: 'absolute', left: pos.x, top: pos.y, transform: 'translate(-50%, -50%)', zIndex: hovered ? 20 : 5, cursor: 'pointer' }}
-    >
-      {hovered && [1, 2].map(r => (
-        <motion.div key={r}
-          animate={{ scale: [1, 2 + r * 0.4], opacity: [0.4, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: r * 0.3 }}
-          style={{ position: 'absolute', inset: -6, borderRadius: '50%', border: `1px solid ${project.accent}` }}
-        />
-      ))}
-
-      <motion.div
-        animate={{
-          y: [0, -6 - (index % 3) * 3, 0],
-          boxShadow: hovered ? `0 0 35px ${project.accent}70, 0 0 70px ${project.accent}30` : `0 0 12px ${project.accent}20`,
-        }}
-        transition={{ y: { duration: 4 + (index % 3) * 0.8, repeat: Infinity, ease: 'easeInOut' }, boxShadow: { duration: 0.3 } }}
-        whileHover={{ scale: 1.15 }}
-        style={{
-          width: hovered ? 110 : 90, height: hovered ? 110 : 90, borderRadius: '50%',
-          background: `radial-gradient(circle at 35% 30%, ${project.accent}20, rgba(10,10,26,0.95) 70%)`,
-          border: `1.5px solid ${hovered ? project.accent : project.accent + '40'}`,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          transition: 'width 0.3s, height 0.3s, border-color 0.3s', padding: '0.5rem',
-        }}
-      >
-        <div style={{
-          position: 'absolute', top: 6, right: 10, width: 6, height: 6, borderRadius: '50%',
-          background: statusColors[project.status], boxShadow: `0 0 6px ${statusColors[project.status]}`,
-          animation: project.status === 'LIVE' ? 'pulse-text 1s infinite' : 'none',
-        }} />
-        <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.5rem', color: project.accent, letterSpacing: '1px', opacity: 0.7 }}>
-          {project.id}
-        </span>
-        <span style={{
-          fontFamily: "'Orbitron', sans-serif", fontSize: hovered ? '0.55rem' : '0.5rem', fontWeight: 700,
-          color: hovered ? project.accent : '#e0e8ff', letterSpacing: '1px', textAlign: 'center', lineHeight: 1.3,
-          marginTop: 2, transition: 'font-size 0.3s, color 0.3s', textShadow: hovered ? `0 0 8px ${project.accent}` : 'none',
-        }}>
-          {project.title}
-        </span>
-        <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.4rem', color: statusColors[project.status], letterSpacing: '1px', marginTop: 3 }}>
-          [{project.status}]
-        </span>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-/* ── Media Carousel for project detail panel ── */
-function MediaCarousel({ media, accent }) {
-  const [current, setCurrent] = useState(0)
-  const [expanded, setExpanded] = useState(false)
-
-  const goNext = (e) => {
-    if (e) e.stopPropagation()
-    setCurrent(prev => {
-      const currentValid = prev < media.length ? prev : 0;
-      return (currentValid + 1) % media.length;
-    })
-  }
-  const goPrev = (e) => {
-    if (e) e.stopPropagation()
-    setCurrent(prev => {
-      const currentValid = prev < media.length ? prev : 0;
-      return (currentValid - 1 + media.length) % media.length;
-    })
-  }
-
-  // Keyboard navigation for fullscreen mode
   useEffect(() => {
-    if (!expanded) return
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') goNext()
-      if (e.key === 'ArrowLeft') goPrev()
-      if (e.key === 'Escape') setExpanded(false)
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [expanded, media])
+  }, [onClose])
 
-  if (!media || media.length === 0) return null
-
-  // Ensure current index is valid for the selected project's media array length
-  const validCurrent = current < media.length ? current : 0;
-  const item = media[validCurrent]
-
-  return (
-    <div style={{ marginBottom: '1.25rem' }}>
-      <div style={{
-        fontFamily: "'Share Tech Mono', monospace", fontSize: '0.5rem', color: '#4a5568',
-        letterSpacing: '2px', marginBottom: '0.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      }}>
-        <span>◈ PROJECT MEDIA</span>
-        <span>{current + 1} / {media.length}</span>
-      </div>
-
-      {/* Media display area */}
-      <div style={{
-        position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden',
-        border: `1px solid ${accent}30`, background: 'rgba(0,0,0,0.3)',
-      }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -40 }}
-            transition={{ duration: 0.3 }}
-          >
-            {item.type === 'video' ? (
-              <video
-                src={item.src}
-                controls
-                style={{ width: '100%', display: 'block', maxHeight: 200, objectFit: 'cover', background: '#000' }}
-              />
-            ) : (
-              <img
-                src={item.src}
-                alt={item.caption || 'Project screenshot'}
-                onClick={(e) => { e.stopPropagation(); setExpanded(true) }}
-                style={{ width: '100%', display: 'block', maxHeight: 200, objectFit: 'cover', cursor: 'zoom-in' }}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Fullscreen expanded view overlay */}
-        {createPortal(
-          <AnimatePresence>
-            {expanded && item.type !== 'video' && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={(e) => { e.stopPropagation(); setExpanded(false) }}
-                style={{
-                  position: 'fixed', inset: 0, zIndex: 9900, background: 'rgba(5,5,15,0.95)',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  backdropFilter: 'blur(10px)', padding: '2rem', cursor: 'zoom-out'
-                }}
-              >
-                <motion.img
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  exit={{ scale: 0.8 }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                  src={item.src}
-                  alt={item.caption || 'Expanded viewing'}
-                  style={{ maxWidth: '95vw', maxHeight: '85vh', objectFit: 'contain', borderRadius: '8px', boxShadow: `0 0 50px ${accent}40`, border: `1px solid ${accent}50`, touchAction: 'none' }}
-                  onClick={(e) => e.stopPropagation()} // prevent closing when clicking image itself
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.2}
-                  onDragEnd={(e, info) => {
-                    if (info.offset.x < -50) goNext();
-                    if (info.offset.x > 50) goPrev();
-                  }}
-                />
-
-                {item.caption && (
-                  <div style={{
-                    position: 'absolute', bottom: 40, fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: '0.8rem', color: accent, letterSpacing: '2px', background: 'rgba(0,0,0,0.6)',
-                    padding: '0.5rem 1rem', borderRadius: '4px', border: `1px solid ${accent}30`
-                  }}>
-                    {item.caption}
-                  </div>
-                )}
-
-                {/* Fullscreen Navigation Buttons */}
-                {media.length > 1 && (
-                  <>
-                    <motion.button
-                      whileHover={{ scale: 1.1, background: 'rgba(0,0,0,0.8)' }}
-                      whileTap={{ scale: 0.9 }}
-                      onClick={(e) => { e.stopPropagation(); goPrev() }}
-                      style={{
-                        position: 'absolute', left: '4vw', top: '50%', transform: 'translateY(-50%)',
-                        width: 50, height: 50, borderRadius: '50%', background: 'rgba(8,8,22,0.5)',
-                        border: `1px solid ${accent}40`, color: accent, fontSize: '1.5rem',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        cursor: 'pointer', backdropFilter: 'blur(8px)', transition: 'background 0.2s'
-                      }}
-                    >
-                      ‹
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.1, background: 'rgba(0,0,0,0.8)' }}
-                      whileTap={{ scale: 0.9 }}
-                      onClick={(e) => { e.stopPropagation(); goNext() }}
-                      style={{
-                        position: 'absolute', right: '4vw', top: '50%', transform: 'translateY(-50%)',
-                        width: 50, height: 50, borderRadius: '50%', background: 'rgba(8,8,22,0.5)',
-                        border: `1px solid ${accent}40`, color: accent, fontSize: '1.5rem',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        cursor: 'pointer', backdropFilter: 'blur(8px)', transition: 'background 0.2s'
-                      }}
-                    >
-                      ›
-                    </motion.button>
-                  </>
-                )}
-
-                <button
-                  onClick={(e) => { e.stopPropagation(); setExpanded(false) }}
-                  style={{
-                    position: 'absolute', top: 30, right: 40, background: 'none', border: 'none',
-                    color: '#fff', fontSize: '2rem', cursor: 'pointer', fontFamily: "'Share Tech Mono', monospace"
-                  }}
-                >
-                  ✕
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
-
-        {/* Navigation arrows */}
-        {media.length > 1 && (
+  return createPortal(
+    <motion.div className="modal-backdrop" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <motion.div
+        className="modal-panel" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={project.title}
+        initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
+      >
+        <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
+        <span className={`pill ${project.status === 'Live' ? 'live' : 'wip'}`}>{project.status}</span>
+        <h3 style={{ marginTop: '0.7rem' }}>{project.title}</h3>
+        <p className="modal-tag">{project.tagline}</p>
+        <p className="modal-tag" style={{ color: '#a1a1aa', fontSize: '0.92rem', lineHeight: 1.7 }}>{project.description}</p>
+        {item && (
           <>
-            <motion.button
-              whileHover={{ background: `${accent}30` }}
-              whileTap={{ scale: 0.9 }}
-              onClick={goPrev}
-              style={{
-                position: 'absolute', left: 6, top: '50%', transform: 'translateY(-50%)',
-                width: 28, height: 28, borderRadius: '50%', background: 'rgba(8,8,22,0.8)',
-                border: `1px solid ${accent}40`, color: accent, fontSize: '0.8rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', backdropFilter: 'blur(8px)', transition: 'background 0.2s',
-              }}
-            >
-              ‹
-            </motion.button>
-            <motion.button
-              whileHover={{ background: `${accent}30` }}
-              whileTap={{ scale: 0.9 }}
-              onClick={goNext}
-              style={{
-                position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)',
-                width: 28, height: 28, borderRadius: '50%', background: 'rgba(8,8,22,0.8)',
-                border: `1px solid ${accent}40`, color: accent, fontSize: '0.8rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', backdropFilter: 'blur(8px)', transition: 'background 0.2s',
-              }}
-            >
-              ›
-            </motion.button>
+            <div className="modal-shot"><img src={item.src} alt={item.caption} loading="lazy" /></div>
+            <div className="modal-nav">
+              <button onClick={() => setI((i - 1 + media.length) % media.length)} aria-label="Previous">‹</button>
+              <span>{(i % media.length) + 1} / {media.length} — {item.caption}</span>
+              <button onClick={() => setI((i + 1) % media.length)} aria-label="Next">›</button>
+            </div>
           </>
         )}
-      </div>
-
-      {/* Caption */}
-      {item.caption && (
-        <div style={{
-          fontFamily: "'Share Tech Mono', monospace", fontSize: '0.55rem', color: '#8892b0',
-          letterSpacing: '1px', marginTop: '0.3rem', textAlign: 'center',
-        }}>
-          {item.caption}
+        <div className="stack-row">{project.stack.map(s => <span key={s} className="stack-tag">{s}</span>)}</div>
+        <div style={{ marginTop: '1.2rem' }}>
+          {project.url
+            ? <a className="btn btn-solid" style={{ width: '100%', justifyContent: 'center' }} href={project.url} target="_blank" rel="noopener noreferrer">Visit live site →</a>
+            : <p className="modal-tag">Code available on request — ask me in an interview.</p>}
         </div>
-      )}
-
-      {/* Dot indicators */}
-      {media.length > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', marginTop: '0.4rem' }}>
-          {media.map((_, i) => (
-            <motion.button
-              key={i}
-              onClick={(e) => { e.stopPropagation(); setCurrent(i) }}
-              animate={{
-                background: i === current ? accent : `${accent}30`,
-                scale: i === current ? 1.3 : 1,
-              }}
-              style={{
-                width: 6, height: 6, borderRadius: '50%', border: 'none', cursor: 'pointer',
-                boxShadow: i === current ? `0 0 8px ${accent}` : 'none', padding: 0,
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+      </motion.div>
+    </motion.div>,
+    document.body
   )
 }
 
-/* ── Expanded project detail panel ── */
-function ProjectDetailPanel({ project, onClose }) {
+/* ── Swirling fan deck — the single home of all 6 projects ── */
+function FanDeck({ onOpen }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const n = projects.length
+
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => setActive(a => (a + 1) % n), 3600)
+    return () => clearInterval(t)
+  }, [paused, n])
+
+  const p = projects[active]
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.6 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      onClick={(e) => e.stopPropagation()}
-      style={{
-        position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', zIndex: 100,
-        background: 'rgba(8,8,22,0.96)', border: `1px solid ${project.accent}50`, borderRadius: '16px',
-        padding: '2rem', width: '90%', maxWidth: 460, backdropFilter: 'blur(20px)',
-        boxShadow: `0 0 50px ${project.accent}25, 0 0 100px ${project.accent}10`,
-        maxHeight: '85vh', overflowY: 'auto',
-      }}
+    <div
+      className="fan"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
-      <motion.button onClick={onClose} whileHover={{ scale: 1.2, color: '#ff5f56' }}
-        style={{ position: 'absolute', top: 12, right: 14, background: 'none', border: 'none', color: '#4a5568', fontFamily: "'Share Tech Mono', monospace", fontSize: '0.9rem', cursor: 'pointer' }}
-      >✕</motion.button>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-        <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.6rem', color: project.accent, letterSpacing: '2px' }}>{project.id}</span>
-        <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.5rem', padding: '0.15rem 0.5rem', borderRadius: '2px', background: `${statusColors[project.status]}15`, border: `1px solid ${statusColors[project.status]}`, color: statusColors[project.status], letterSpacing: '1px' }}>
-          {project.status}
-        </span>
+      <div className="fan-left">
+        <p className="kicker">Featured work</p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={p.title}
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="fan-cat">{p.cat}</p>
+            <h3 className="fan-title">{p.title}</h3>
+            <p className="fan-tag">{p.tagline}</p>
+            <p className="fan-desc">{p.description}</p>
+            <div className="stack-row" style={{ margin: '1rem 0 1.4rem' }}>
+              {p.stack.map(s => <span key={s} className="stack-tag">{s}</span>)}
+            </div>
+            <div style={{ display: 'flex', gap: '0.7rem', flexWrap: 'wrap' }}>
+              <button className="btn btn-solid" onClick={() => onOpen(p)}>Case study</button>
+              {p.url && <a className="btn btn-ghost" href={p.url} target="_blank" rel="noopener noreferrer">Live site ↗</a>}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        <div className="fan-tabs">
+          {projects.map((t, i) => (
+            <button
+              key={t.title}
+              className={`fan-tab ${i === active ? 'on' : ''}`}
+              onClick={() => setActive(i)}
+            >
+              {t.title.split(' ')[0].replace('—', '')}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <h3 style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: project.accent, letterSpacing: '2px', marginBottom: '1rem', textShadow: `0 0 15px ${project.accent}40` }}>
-        {project.title}
-      </h3>
-
-      <motion.div initial={{ width: 0 }} animate={{ width: '100%' }} transition={{ duration: 0.5 }}
-        style={{ height: 1, background: `linear-gradient(90deg, transparent, ${project.accent}50, transparent)`, marginBottom: '1rem' }}
-      />
-
-      <p style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: '0.9rem', color: '#8892b0', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-        {project.description}
-      </p>
-
-      {/* Media Carousel — shows only if project has media */}
-      <MediaCarousel media={project.media} accent={project.accent} />
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
-        {project.tech.map(t => (
-          <span key={t} style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.6rem', padding: '0.2rem 0.6rem', border: `1px solid ${project.accent}40`, borderRadius: '2px', color: project.accent, letterSpacing: '1px', background: `${project.accent}08` }}>
-            {t}
-          </span>
-        ))}
+      <div className="fan-stage">
+        {projects.map((t, i) => {
+          const rel = (i - active + n) % n
+          if (rel > 4) return null
+          const dim = rel !== 0
+          return (
+            <motion.div
+              key={t.title}
+              className="fan-card"
+              onClick={() => (rel === 0 ? onOpen(t) : setActive(i))}
+              animate={{
+                x: rel * 88,
+                y: rel === 0 ? 0 : rel * 26,
+                rotate: rel * 7,
+                scale: 1 - rel * 0.07,
+                opacity: 1 - rel * 0.16,
+                zIndex: 50 - rel,
+                filter: dim ? 'brightness(0.55)' : 'brightness(1)',
+              }}
+              transition={{ type: 'spring', stiffness: 160, damping: 22 }}
+              whileHover={rel === 0 ? { scale: 1.02 } : { filter: 'brightness(0.8)' }}
+              style={{ cursor: 'pointer' }}
+            >
+              <img src={t.shot} alt="" loading="lazy" />
+              <div className="fan-card-shade" style={{ background: `linear-gradient(180deg, transparent 30%, rgba(5,5,6,0.88)), radial-gradient(120% 90% at 80% 0%, ${t.glow}, transparent 60%)` }} />
+              <div className="fan-card-body">
+                <h4>{t.title}</h4>
+                <p>{t.tagline}</p>
+                <span className={`pill ${t.status === 'Live' ? 'live' : 'wip'}`}>{t.status}</span>
+              </div>
+            </motion.div>
+          )
+        })}
       </div>
 
-      {project.url && (
-        <motion.button
-          whileHover={{ boxShadow: `0 0 20px ${project.accent}40`, background: `${project.accent}15` }}
-          onClick={() => window.open(project.url, "_blank")}
-          style={{ width: '100%', padding: '0.7rem', background: `${project.accent}08`, border: `1px solid ${project.accent}60`, borderRadius: '6px', color: project.accent, fontFamily: "'Orbitron', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '3px', cursor: 'pointer', transition: 'all 0.3s' }}
-        >
-          ◈ ACCESS PROJECT →
-        </motion.button>
-      )}
-    </motion.div>
+      <p className="fan-hint">Hover to pause. Click a card to open the case study.</p>
+    </div>
   )
 }
 
 export default function ProjectHub() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px' })
-  const [hoveredIdx, setHoveredIdx] = useState(-1)
-  const [selectedProject, setSelectedProject] = useState(null)
-  const [containerSize, setContainerSize] = useState({ w: 900, h: 650 })
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    const measure = () => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        setContainerSize({ w: rect.width, h: rect.height })
-      }
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [])
-
-  const W = containerSize.w, H = containerSize.h, cx = W / 2, cy = H / 2
-
-  const nodePositions = projects.map((_, i) => {
-    const total = projects.length
-    const angle = (i / total) * Math.PI * 2 - Math.PI / 2
-    const rBase = Math.min(W, H) * 0.35
-    const rVariance = (i % 2 === 0 ? 0.85 : 1.1) * rBase
-    return { x: cx + Math.cos(angle) * rVariance * 1.05, y: cy + Math.sin(angle) * rVariance * 0.8 }
-  })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const [selected, setSelected] = useState(null)
 
   return (
-    <section className="section" id="projects" ref={ref}>
-      <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}>
-        🚀 PROJECT HUB
+    <section className="section" id="work" ref={ref}>
+      <motion.div initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
+        <FanDeck onOpen={setSelected} />
       </motion.div>
-      <motion.h2 className="section-title" initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }} animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ delay: 0.2, duration: 0.6 }}>
-        Mission Archives
-      </motion.h2>
-      <motion.p style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '0.7rem', color: '#4a5568', letterSpacing: '3px', marginBottom: '1rem', marginTop: '-1.5rem' }} initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ delay: 0.4 }}>
-        {'[ CLICK NODE TO ACCESS // HOVER TO INSPECT ]'}
-      </motion.p>
 
-      <div ref={containerRef} onClick={() => setSelectedProject(null)} style={{ position: 'relative', width: '100%', maxWidth: 950, height: '65vh', minHeight: 520 }}>
-        <NodeConnections positions={nodePositions} activeIdx={hoveredIdx} />
-
-        {/* Center node */}
-        <motion.div initial={{ scale: 0 }} animate={isInView ? { scale: 1 } : {}} transition={{ delay: 0.1, type: 'spring', stiffness: 100 }}
-          style={{ position: 'absolute', left: cx, top: cy, transform: 'translate(-50%, -50%)', zIndex: 10 }}
-        >
-          <motion.div
-            animate={{ boxShadow: ['0 0 25px rgba(185,70,255,0.3), 0 0 55px rgba(185,70,255,0.12)', '0 0 40px rgba(185,70,255,0.5), 0 0 80px rgba(0,245,255,0.15)', '0 0 25px rgba(185,70,255,0.3), 0 0 55px rgba(185,70,255,0.12)'] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            style={{ width: 70, height: 70, borderRadius: '50%', background: 'radial-gradient(circle at 40% 35%, rgba(185,70,255,0.15), rgba(10,10,26,0.98) 70%)', border: '1.5px solid rgba(185,70,255,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.5rem', fontWeight: 700, color: '#b946ff', letterSpacing: '1px', textAlign: 'center', lineHeight: 1.3 }}>PROJECT<br />HUB</span>
-          </motion.div>
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            style={{ position: 'absolute', inset: -10, borderRadius: '50%', border: '1px solid rgba(185,70,255,0.2)', borderTopColor: 'transparent' }}
-          />
-        </motion.div>
-
-        {/* Center-to-node lines */}
-        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}>
-          {nodePositions.map((pos, i) => (
-            <line key={`c-${i}`} x1={cx} y1={cy} x2={pos.x} y2={pos.y}
-              stroke={hoveredIdx === i ? projects[i].accent : '#b946ff'}
-              strokeWidth={hoveredIdx === i ? 1.2 : 0.3} strokeOpacity={hoveredIdx === i ? 0.6 : 0.06}
-              strokeDasharray={hoveredIdx === i ? 'none' : '4 4'} style={{ transition: 'all 0.4s ease' }}
-            />
-          ))}
-        </svg>
-
-        {projects.map((project, i) => (
-          <ProjectNode key={project.id} project={project} index={i} isInView={isInView} pos={nodePositions[i]}
-            hovered={hoveredIdx === i} onHover={() => setHoveredIdx(i)} onLeave={() => setHoveredIdx(-1)}
-            onClick={(e) => { e.stopPropagation(); setSelectedProject(project) }}
-          />
-        ))}
-
-        <AnimatePresence>
-          {selectedProject && <ProjectDetailPanel project={selectedProject} onClose={() => setSelectedProject(null)} />}
-        </AnimatePresence>
-      </div>
+      <AnimatePresence>
+        {selected && <Modal project={selected} onClose={() => setSelected(null)} />}
+      </AnimatePresence>
     </section>
   )
 }
