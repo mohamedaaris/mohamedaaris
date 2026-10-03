@@ -172,7 +172,16 @@ function Modal({ project, onClose }) {
 function FanDeck({ onOpen }) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [compact, setCompact] = useState(false)
   const n = projects.length
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 600px)')
+    const sync = () => setCompact(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   useEffect(() => {
     if (paused) return
@@ -233,9 +242,9 @@ function FanDeck({ onOpen }) {
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
               animate={{
-                x: rel * 88,
-                y: rel === 0 ? 0 : rel * 26,
-                rotate: rel * 7,
+                x: rel * (compact ? 36 : 88),
+                y: rel === 0 ? 0 : rel * (compact ? 14 : 26),
+                rotate: rel * (compact ? 4 : 7),
                 scale: 1 - rel * 0.07,
                 opacity: 1 - rel * 0.16,
                 zIndex: 50 - rel,

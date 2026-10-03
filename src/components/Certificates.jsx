@@ -39,7 +39,7 @@ const certificates = [
 const tabs = ['All', 'Internship', 'Assessments', 'IBM', 'ServiceNow', 'Learning']
 const matches = (c, t) => {
   if (t === 'All') return true
-  if (t === 'Internship') return !!c.featured
+  if (t === 'Internship') return /internship/i.test(c.title) || /internship/i.test(c.issuer)
   if (t === 'Assessments') return c.issuer.startsWith('HackerRank') || c.issuer.startsWith('ADMA')
   if (t === 'IBM') return c.issuer.startsWith('IBM')
   if (t === 'ServiceNow') return c.issuer.startsWith('ServiceNow')

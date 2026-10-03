@@ -36,8 +36,8 @@ function BioBlock() {
     <div ref={ref} className="cream-bio">
       <FadeCol progress={scrollYProgress} range={[0, 0.45]}>
         <p>
-          Currently pursuing my B.E. in Computer Science and Engineering at Rajalakshmi Engineering College, graduating in 2028 — a skilled web and
-          full-stack developer with comprehensive expertise across <b>front-end and back-end
+          Currently pursuing my B.E. in Computer Science and Engineering at Rajalakshmi Engineering College, graduating in 2028 — a web and
+          full-stack developer with hands-on experience across <b>front-end and back-end
           technologies.</b> I build web apps, realtime systems and interfaces that feel right.
         </p>
       </FadeCol>
@@ -45,7 +45,7 @@ function BioBlock() {
         <p>
           Passionate about crafting visually stunning, highly functional digital experiences
           that push the boundaries of web technology — from Flask backends and Socket.IO rooms
-          to a published graph-theory paper. <a href="#contact">About me →</a>
+           to a published graph-theory paper. <a href="#contact">Contact me →</a>
         </p>
       </FadeCol>
     </div>

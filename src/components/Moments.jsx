@@ -131,8 +131,14 @@ function OrbitDeck({ onOpen }) {
     const measure = () => {
       if (!stageRef.current) return
       const w = stageRef.current.clientWidth
-      const rx = Math.max(Math.min(w / 2 - 175, 250), 90)
-      setGeom({ cx: w / 2 - 150, rx, cy: 110, ry: 140 })
+      if (w < 600) {
+        const cardW = Math.min(240, w * 0.7)
+        const rx = Math.max(w / 2 - cardW / 2 - 14, 42)
+        setGeom({ cx: w / 2 - cardW / 2, rx, cy: 88, ry: 104 })
+      } else {
+        const rx = Math.max(Math.min(w / 2 - 175, 250), 90)
+        setGeom({ cx: w / 2 - 150, rx, cy: 110, ry: 140 })
+      }
     }
     measure()
     window.addEventListener('resize', measure)

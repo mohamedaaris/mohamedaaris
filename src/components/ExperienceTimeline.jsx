@@ -1,5 +1,5 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const miles = [
   { n: '01', cat: 'HTML · CSS', flap: 'FIRST', title: 'First websites', body: 'Static pages and CSS experiments — where the obsession with layout started.', img: '/assets/miraisync1.jpg' },
@@ -40,7 +40,16 @@ export default function ExperienceTimeline() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [idx, setIdx] = useState(0)
   const [dir, setDir] = useState(1)
+  const [compact, setCompact] = useState(false)
   const n = miles.length
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 600px)')
+    const sync = () => setCompact(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   const go = (d) => {
     setDir(d)
@@ -79,8 +88,8 @@ export default function ExperienceTimeline() {
                 className="flip-card"
                 onClick={() => go(1)}
                 animate={{
-                  x: rel * 26,
-                  rotate: rel * 6,
+                  x: rel * (compact ? 12 : 26),
+                  rotate: rel * (compact ? 3 : 6),
                   scale: 1 - rel * 0.045,
                   opacity: 1 - rel * 0.22,
                   zIndex: 60 - rel,

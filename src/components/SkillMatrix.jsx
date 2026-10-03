@@ -97,10 +97,10 @@ function ThreadCanvas() {
 }
 
 const proof = [
-  { v: 6, label: 'Sites live on the web' },
+  { v: 6, label: 'Builds shipped · 5 live' },
   { v: 12, label: 'Verified credentials' },
   { v: 1, label: 'Q1 journal paper (IF 6.2)' },
-  { v: 8, label: 'Milestones and counting' },
+  { v: 11, label: 'Milestones and counting' },
 ]
 
 function ProofNum({ v }) {
