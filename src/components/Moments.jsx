@@ -24,8 +24,8 @@ const moments = [
     img: '/assets/prize1.jpg',
     tag: 'Award',
     short: 'Prize',
-    title: '2nd prize — Design Thinking',
-    caption: 'FlowLink took 2nd prize at the Design Thinking Contest in my college.',
+    title: '2nd place — Design Thinking',
+    caption: 'FlowLink took 2nd place at the Design Thinking Contest in my college.',
   },
   {
     img: '/assets/ICGTA%20conference%20cochin.jpeg',
@@ -96,16 +96,20 @@ function OrbitCard({ mv, i, n, m, geom, onOpen, onHold, onRelease }) {
   return (
     <motion.div
       className="orbit-card"
-      onClick={() => onOpen(m)}
-      onMouseEnter={onHold}
-      onMouseLeave={onRelease}
       style={{ transform, opacity, zIndex, filter }}
     >
-      <img src={m.img} alt={m.title} loading="lazy" draggable={false} onError={(e) => { e.currentTarget.style.display = 'none' }} />
-      <div className="fan-card-shade" style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(5,5,6,0.88))' }} />
-      <div className="fan-card-body">
-        <p className="fan-cat" style={{ margin: 0 }}>{m.tag}</p>
-        <h4>{m.title}</h4>
+      <div
+        className="orbit-card-hit-area"
+        onClick={() => onOpen(m)}
+        onMouseEnter={onHold}
+        onMouseLeave={onRelease}
+      >
+        <img src={m.img} alt={m.title} loading="lazy" draggable={false} onError={(e) => { e.currentTarget.style.display = 'none' }} />
+        <div className="fan-card-shade" style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(5,5,6,0.88))' }} />
+        <div className="fan-card-body">
+          <p className="fan-cat" style={{ margin: 0 }}>{m.tag}</p>
+          <h4>{m.title}</h4>
+        </div>
       </div>
     </motion.div>
   )

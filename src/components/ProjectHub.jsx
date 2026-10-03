@@ -183,11 +183,7 @@ function FanDeck({ onOpen }) {
   const p = projects[active]
 
   return (
-    <div
-      className="fan"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <div className="fan">
       <div className="fan-left">
         <p className="kicker">Featured work</p>
         <AnimatePresence mode="wait">
@@ -234,6 +230,8 @@ function FanDeck({ onOpen }) {
               key={t.title}
               className="fan-card"
               onClick={() => (rel === 0 ? onOpen(t) : setActive(i))}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
               animate={{
                 x: rel * 88,
                 y: rel === 0 ? 0 : rel * 26,
@@ -259,7 +257,7 @@ function FanDeck({ onOpen }) {
         })}
       </div>
 
-      <p className="fan-hint">Hover to pause. Click a card to open the case study.</p>
+      <p className="fan-hint">Hover a card to pause. Click a card to open the case study.</p>
     </div>
   )
 }
