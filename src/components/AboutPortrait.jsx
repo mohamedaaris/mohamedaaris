@@ -45,7 +45,8 @@ function BioBlock() {
         <p>
           Passionate about crafting visually stunning, highly functional digital experiences
           that push the boundaries of web technology — from Flask backends and Socket.IO rooms
-           to a published graph-theory paper. <a href="#contact">Contact me →</a>
+           to a published graph-theory paper and a 1st-place win at the SmartX hackathon
+           (AERON, warehouse automation with a fleet of autonomous robots). <a href="#contact">Contact me →</a>
         </p>
       </FadeCol>
     </div>
@@ -90,6 +91,7 @@ export default function AboutPortrait() {
           <div className="cream-facts">
             <div><span>Studying</span><b>CSE, Rajalakshmi Engineering College '28</b></div>
             <div><span>Involved in</span><b>ERPNext internship · SIH · Research</b></div>
+            <div><span>Won</span><b>SmartX Hackathon — 1st Place, REC</b></div>
             <div><span>Based in</span><b>Chennai, India</b></div>
           </div>
         </div>

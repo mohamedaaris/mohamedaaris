@@ -38,7 +38,7 @@ export default function CoreIdentity() {
         <motion.div className="hero-meta" variants={rise} initial="hidden" animate="show" custom={0.65}>
           <span><b>BASED</b> · Chennai, India</span>
           <span><b>STUDY</b> · CSE, REC '28</span>
-          <span><b>SHIPPED</b> · 6 builds, 5 live</span>
+          <span><b>SHIPPED</b> · 7 builds, 5 live · 1× hackathon winner</span>
         </motion.div>
       </motion.div>
 

@@ -4,6 +4,23 @@ import { createPortal } from 'react-dom'
 
 const projects = [
   {
+    title: 'AERON',
+    tagline: 'Warehouse automation — SmartX Hackathon 1st place',
+    description: 'Autonomous Execution & Robotic Operations Network — a team hackathon project. A custom e-commerce store and APIs driving real-time order processing, inventory management and warehouse shelf mapping, with a fleet of five AMRs performing coordinated pickup, storage and delivery via dynamic task allocation, A* pathfinding, three-lane navigation, collision avoidance and shelf/conveyor reservations. Battery-aware scheduling, simulated LiDAR and camera obstacle detection, robot-to-robot communication and synchronized 2D/3D visualization close the loop from order to delivery.',
+    stack: ['AMR Fleet', 'A* Pathfinding', 'Realtime APIs', 'Collision Avoidance', '2D/3D Visualization'],
+    cat: 'SmartX Hackathon · 1st Place',
+    status: '1st Place',
+    pill: 'win',
+    url: null,
+    shot: '/assets/Aeron%20site.png',
+    glow: 'rgba(200,255,46,0.15)',
+    note: 'Built with the team at SmartX, Robotics & Automation Department, Rajalakshmi Engineering College.',
+    media: [
+      { src: '/assets/Aeron%20site.png', caption: 'AERON e-commerce site' },
+      { src: '/assets/Aeron%20blender.png', caption: '3D warehouse render' },
+    ],
+  },
+  {
     title: 'MiraiSync',
     tagline: 'Realtime collaborative watch-party platform',
     description: 'Synchronized video playback across locations with realtime chat via WebSockets, room creation and multi-source support with latency handling.',
@@ -142,9 +159,10 @@ function Modal({ project, onClose }) {
         initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
       >
         <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
-        <span className={`pill ${project.status === 'Live' ? 'live' : 'wip'}`}>{project.status}</span>
+        <span className={`pill ${project.pill || (project.status === 'Live' ? 'live' : 'wip')}`}>{project.status}</span>
         <h3 style={{ marginTop: '0.7rem' }}>{project.title}</h3>
         <p className="modal-tag">{project.tagline}</p>
+        {project.note && <p style={{ margin: '0.4rem 0 0', color: '#a1a1aa', fontSize: '0.85rem' }}>{project.note}</p>}
         <p className="modal-tag" style={{ color: '#a1a1aa', fontSize: '0.92rem', lineHeight: 1.7 }}>{project.description}</p>
         {item && (
           <>
@@ -259,7 +277,7 @@ function FanDeck({ onOpen }) {
               <div className="fan-card-body">
                 <h4>{t.title}</h4>
                 <p>{t.tagline}</p>
-                <span className={`pill ${t.status === 'Live' ? 'live' : 'wip'}`}>{t.status}</span>
+                <span className={`pill ${t.pill || (t.status === 'Live' ? 'live' : 'wip')}`}>{t.status}</span>
               </div>
             </motion.div>
           )

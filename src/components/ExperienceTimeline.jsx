@@ -13,6 +13,7 @@ const miles = [
   { n: '09', cat: 'IBM SkillsBuild', flap: 'GENAI', title: 'IBM SkillsBuild internship', body: 'Edunet Foundation program — watsonx AI Studio, Orchestrate, Granite models and BOB. Built SmartDesk AI, a natural-language desktop assistant.', img: '/assets/ibm.png' },
   { n: '10', cat: 'React · AI', flap: 'SHIP', title: 'Realtime and AI products', body: 'ResuMatch AI, FlowLink, research agents — live, demoable, used.', img: '/assets/resumatch1.jpeg' },
   { n: '11', cat: 'ICODMATH 2026', flap: 'STAGE', title: 'Two papers on stage', body: 'Presented “Number of 3-step Pairs in Fractal Cubic Network” and “Average Distance in {3,5}-Regular Cyclic Bipartite Graphs” at ICODMATH2026, REC.', img: '/assets/ICODMATH.jpg' },
+  { n: '12', cat: 'SmartX · Robotics', flap: 'WINNER', title: '1st place — SmartX Hackathon', body: 'AERON: warehouse automation with a fleet of five AMRs — task allocation, A* pathfinding, collision avoidance and 2D/3D visualization. Built with the team for the Robotics & Automation department\'s SmartX hackathon at REC.', img: '/assets/Aeron%20Prize.jpeg' },
 ]
 
 function SplitFlap({ text }) {
@@ -71,7 +72,7 @@ export default function ExperienceTimeline() {
           >
             How I got<br /><span className="it">here</span>
           </motion.h2>
-          <p className="section-desc">From static pages to realtime platforms.</p>
+          <p className="section-desc">From static pages to winning hackathons.</p>
           <div style={{ marginTop: '1.8rem' }}>
             <SplitFlap text={m.flap} />
           </div>

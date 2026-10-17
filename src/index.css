@@ -180,6 +180,7 @@ textarea:focus-visible, select:focus-visible {
 }
 .pill.live { color: var(--lime); border-color: rgba(200,255,46,0.45); }
 .pill.wip { color: var(--orange); border-color: rgba(255,158,44,0.45); }
+.pill.win { color: #ffd75e; border-color: rgba(255,215,94,0.45); }
 
 .index-table { border-top: 1px solid var(--line); }
 .filter-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }

@@ -20,6 +20,13 @@ const moments = [
     caption: 'Heads-down during SIH 2026 — building, debugging and shipping with the team.',
   },
   {
+    img: '/assets/Aeron%20Prize.jpeg',
+    tag: 'Award',
+    short: 'SmartX',
+    title: 'SmartX — 1st place',
+    caption: 'AERON took 1st place at the SmartX hackathon by the Robotics & Automation department, Rajalakshmi Engineering College.',
+  },
+  {
     // Drop your photo in as public/assets/prize1.jpg — the card appears automatically.
     img: '/assets/prize1.jpg',
     tag: 'Award',
