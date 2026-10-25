@@ -11,7 +11,7 @@ const projects = [
     cat: 'SmartX Hackathon · 1st Place',
     status: '1st Place',
     pill: 'win',
-    url: null,
+    url: 'https://smartx-finals.onrender.com/',
     shot: '/assets/Aeron%20site.png',
     glow: 'rgba(200,255,46,0.15)',
     note: 'Built with the team at SmartX, Robotics & Automation Department, Rajalakshmi Engineering College.',
